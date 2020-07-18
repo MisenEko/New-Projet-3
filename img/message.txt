@@ -1,0 +1,57 @@
+	class Canvas{
+    constructor(    ){
+      let c = document.getElementById("myCanvas");
+
+      /*this.c.addEventListener("mousedown", lastCoords); 
+      this.c.addEventListener("mousemove", clickCheck);
+      this.c.addEventListener("touchstart", lastCoordsMobile); 
+      this.c.addEventListener("touchmove", touchEvent);*/
+      this.ctx = c.getContext("2d");
+      this.lastX = 0;
+      this.lastY = 0;  
+    }
+
+    lastCoords(e) {
+        this.c = document.getElementById("myCanvas");
+        this.rect = this.c.getBoundingClientRect(); // obtention des dimensions du rectangle du canvas
+        this.x = this.rect.x;
+        this.y = this.rect.y;
+        this.lastX = e.clientX - this.x;      // permet de connaître la position de la souris et de l'enregistrer comme dernière position
+        this.lastY = e.clientY - this.y; 
+        console.log(this.lastX +" et "+this.lastY)     
+    }
+  
+    lastCoordsMobile(){
+      const {x, y} = c.getBoundingClientRect(); // obtention des dimensions du rectangle du canvas
+      lastX = event.touches[0].clientX - x;     // permet de connaître la position du doigt et de l'enregistrer comme dernière position
+      lastY = event.touches[0].clientY - y;
+  
+    }
+    
+    clickCheck(e) {
+      if (e.buttons !== 1) return; // return "rien" si le click gauche n'a toujours pas été effectué
+        this.paint(e);
+        
+    }
+    
+    paint(e) {
+      this.c = document.getElementById("myCanvas");
+      this.rect = this.c.getBoundingClientRect(); // obtention des dimensions du rectangle du canvas
+      this.newX = e.clientX - this.x;
+      this.newY = e.clientY - this.y;
+     
+
+        
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 2;
+        this.ctx.moveTo(lastX, lastY);
+        this.ctx.lineTo(newX, newY);
+        this.ctx.strokeStyle = 'black';
+        this.ctx.stroke();
+        this.ctx.closePath();
+        
+        this.lastX = this.newX;
+        this.lastY = this.newY;
+    }
+
+  }
