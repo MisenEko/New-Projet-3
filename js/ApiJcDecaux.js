@@ -50,8 +50,8 @@ class ApiJcDecaux{
                     $( "#reservationOn" ).fadeIn( "slow");
                    //document.getElementById("4").textContent = station.totalStands.capacity;
                     
-                    /*sessionStorage.setItem("5" , station.address);
-                    sendFormInstance.setStationAdress(station.address);*/
+                    sessionStorage.setItem("sessionAdress" , station.address);
+                    sendFormInstance.setStationAdress(station.address);
                     }
                      
                     

@@ -262,30 +262,49 @@
 		<!-- End Call to Action Bar -->
 
 
-		<!-- Map from leaftlet -->
+		<!-- Bike Application -->
 		<div class="section">
 			<div clas="container">
 				<div class="row">					
 						<div id="mapid" class=" z-depth-1-half map-container col-md-8" style="height: 500px"></div>
 						<div id="stationContain" class="col-md-4">
 							<h3>Information de la station</h3>
-						<div id="StationInfo" class="col-md-12" style="display: none;">
-							<div class="col-md-12">Nom de la station : <span id="stationName"></span></div>
-							<div class="col-md-12">Adresse : <span  id="stationAddress"></span ></div>
-							<div class="col-md-12">Il y a : <span  id="stationTotal"></span ></div>
 
+							<div id="StationInfo" class="col-md-12" style="display: none;">
+								<div class="col-md-12">Nom de la station : <span id="stationName"></span></div>
+								<div class="col-md-12">Adresse : <span  id="stationAddress"></span ></div>
+								<div class="col-md-12">Il y a : <span  id="stationTotal"></span ></div>
+								<button type="button" id="reservationOn" class="btn btn-primary" style="display: none;">Commencer la Réservation</button>
+							</div>
 
-						</div>
-						<div id="reservation"class="col-md-4" style="display: none;">
-							<div id="1"></div>
-							<div id="2"></div>
-							<div id="3"></div>
-						</div>
+							<div id="reservationForm"class="col-md-4" style="display: none;">
+								<form id='formContainer'>
+
+									<div class="form-group">
+										<label for="lastName">Nom</label>
+										<input type="text" class="form-control" id="txtLastName" aria-describedby="emailHelp" placeholder="Votre nom">								  
+									</div>
+
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password</label>
+										<input type="text" class="form-control" id="txtFirstName" placeholder="Votre prénom">
+									</div>
+
+									<button type="submit" class="btn btn-primary" id="sendForm">Submit</button>
+									
+									<div id='errorName'  class="" style="display: none"> Tout les champs sont requis</div>
+
+								</form>
+							</div>
 						
 
 						</div>
-						<div><input type="button" id="reservationOn" class="style_button" value="Réservation" style="display: none;"></div>
 						<div id="erreurVelo" class="col-md-4" style="display: none;">Aucun vélo disponible, veuillez changer de station.</div>
+						<div id="reservContainer" class="col-md-4 mr-1">
+							<p>La réservation au nom de : <span id="reservationName"></span> a bien été prise en compte.</p>
+							<p>Votre vélo vous attend à la station : <span id="reservationAdress"></span></p>
+							<p>Notez que votre réservation sera expirée au bout de : <span id="chrono"></span> minutes ou si vous fermez votre onglet ou navigateur.</p>
+						</div>
 				</div>
 			</div>			
 		</div>
@@ -359,7 +378,10 @@
         <script src="js/main-menu.js"></script>
 		<script src="js/template.js"></script>
 
-
+		<script src='js/storage.js'></script>
+		<script src='js/chrono.js'></script>
+		<script src="js/form.js"></script>
+		<script src="js/CheckForm.js"></script>
 		<script src="js/leaflet-color-markers.js"></script>
 		<script src='js/ApiJcDecaux.js'></script>		
 		<script src="js/main.js"></script>
