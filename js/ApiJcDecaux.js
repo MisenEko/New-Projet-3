@@ -22,9 +22,7 @@ class ApiJcDecaux{
     }
 
     markerGroup(){
-        this.getAjax(markerList => {
-
-           
+        this.getAjax(markerList => {           
 
             markerList.forEach(station => {
                 let colorMarker = greenIcon;
@@ -35,23 +33,36 @@ class ApiJcDecaux{
 
                 
 
-                marker.on("click", (e) => {
+                marker.on("click", () => {
 
-                    let veloUp = station.totalStands.availabilities.bikes;  
-                    console.log(veloUp)                   
-                    if(veloUp === 0){
-                        console.log("test")
-                        $( "#erreurVelo" ).fadeIn( "slow");
-                    }else {
-                        $( "#StationInfo" ).fadeIn( "slow");                    
-                    document.getElementById("stationName").innerHTML= station.name;
-                    document.getElementById("stationAddress").innerHTML = station.address;                    
-                    document.getElementById("stationTotal").innerHTML = station.totalStands.availabilities.bikes+" Vélos disponible sur "+station.totalStands.capacity;
-                    $( "#reservationOn" ).fadeIn( "slow");
-                   //document.getElementById("4").textContent = station.totalStands.capacity;
-                    
-                    sessionStorage.setItem("sessionAdress" , station.address);
-                    sendFormInstance.setStationAdress(station.address);
+                    let veloUp = station.totalStands.availabilities.bikes; 
+                                                         
+                        if(veloUp === 0){
+                            $( "#stationInfo").hide();                      
+                            $( "#erreurVelo" ).fadeIn( "slow");
+                        }else if (sessionStorage.length<=1){
+                            $( '#cancelReservationOn').hide();
+                            $( "#stationInfo" ).fadeIn( "slow");
+                            $( "#erreurVelo").hide();                     
+                            document.getElementById("stationName").innerHTML= station.name;
+                            document.getElementById("stationAddress").innerHTML = station.address;                    
+                            document.getElementById("stationTotal").innerHTML = station.totalStands.availabilities.bikes+" Vélos disponible sur "+station.totalStands.capacity;
+                             $( "#reservationOn" ).fadeIn( "slow");                                    
+                            sessionStorage.setItem("sessionAdress" , station.address);
+                            sendFormInstance.setStationAdress(station.address);
+
+                        }else if (sessionStorage.length>1) {
+                           
+                            $( '#reservationOn').hide();
+                            $( '#cancelReservationOn').fadeIn('fast');
+                            $( '#cancelReservationOn').click(function(){
+                            $( '#cancelReservationOn' ).hide();
+                            $( '#reservContainer' ).hide();
+                            $( '#reservationOn' ).fadeIn('slow');
+                            sessionStorage.clear();                            
+                            chronoInstance.stopChrono();
+
+                        })
                     }
                      
                     

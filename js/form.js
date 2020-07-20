@@ -1,9 +1,4 @@
 let form = document.getElementById("formContainer");
-let formButton = document.getElementById("sendForm");
-
-
-
-
 
 
 
@@ -17,33 +12,22 @@ let formButton = document.getElementById("sendForm");
 
 
     //bouton pour valider nom / prénom avec vérification et afficher signature
-    document.getElementById("sendForm").addEventListener("click", function(e){
-        e.preventDefault();
+    $( '#sendForm' ).click(function(event){
+        event.preventDefault();
         let checkValue =  false;
         
         checkValue = sendFormInstance.check(form, checkValue); //envoie du formulaire et de checkvalue pour vérifier si nom et prénom sont rempli.
-        if(checkValue){
+        
+        if(checkValue){          
+            
+
             $( "#formContainer" ).hide();
             $( "#signContainer" ).fadeIn ("slow");
-            
-        }else{
-            document.getElementById("errorName").textContent = "Tout les champs sont requis."; 
-        }
-    })  
 
-    //bouton pour valider la signature, ajout d'information dans le local/session storage + lancement du chrono et activation des effets d'animation
-    formButton.addEventListener("click", function(event){       
-
-        let dataCheck = false;
-        
-
-   
-           // si le canvas est bien signé : 
-            event.preventDefault();
             localStorage.clear();   //nouvelle réservation, on clear le storage
 
-            let mStorage = 20;  // 20 minutes pour le chrono
-            let sStorage = 0;  // 00 secondes pour le chrono 
+            let mStorage = 5;  // 5 minutes pour le chrono
+            let sStorage = 00;  // 00 secondes pour le chrono 
 
             
             localStorage.setItem("localFirstName" , form[0].value);     // nom et prénom envoyé vers le local storage
@@ -69,18 +53,19 @@ let formButton = document.getElementById("sendForm");
 
             chronoInstance.drawInDom();
             chronoInstance.startChrono();
-
-            /**Element graphique du formulaire */
-            document.getElementById("formContainer").classList.add("hideElement");
-            document.getElementById("reservationOn").classList.add("hideElement");
            
-            $( "#signContainer" ).fadeOut ("slow");
-            $( "#container").slideUp("slow");
+            
             $('#reservContainer').fadeIn('slow');
+            $('#reservationOn').hide();
+            $('#cancelReservationOn').fadeIn('slow');            
+         
+    } else {
+        $( '#errorName' ).fadeIn("fast"); 
+    };
+    })  
 
-
-
-        }); 
+    
+    
 
 
 
