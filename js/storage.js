@@ -1,13 +1,9 @@
-function getStorage(){
+ function getStorage(){
 
-    console.log(sessionStorage.getItem("minute"))
+    
+    if( sessionStorage.getItem("minute")==="null"){sessionStorage.clear()};
     //récupération du temps du chrono dans le storage et envoit de l'ancien temps vers fonction chrono
     
-    if(sessionStorage.getItem('minute')==='null'){sessionStorage.clear()};
-    
-    
-
-
     if( sessionStorage.length > 0 ){
         let mStorage = sessionStorage.getItem("minute");
         let sStorage = sessionStorage.getItem("seconde");
@@ -24,19 +20,16 @@ function getStorage(){
         chronoInstance.stopChrono();   
         chronoInstance.startChrono();
         chronoInstance.drawInDom();
-
         $('#reservContainer').fadeIn('slow');
-        $( '#stationInfo').hide()
-        $( '#cancelReservationOn').fadeIn('fast');
 
-    } else if (sessionStorage.getItem("minute") === "null"){ 
+    } else { 
         $('#reservContainer').hide();
     }
 
     //récupération nom / Prénom du local storage pour le mettre dans le formulaire par défaut
     if (localStorage.length > 0)
     {
-    let lastNStorage = localStorage.getItem("localFirstName");
+        let lastNStorage = localStorage.getItem("localFirstName");
         let firstNStorage = localStorage.getItem("localLastName");        
         let form = document.getElementById("formContainer");
         

@@ -1,4 +1,4 @@
-class CheckForm{
+class SendForm{
 
     constructor(stationAdress, lastName , firstName){
         this.stationAdress=stationAdress;
@@ -27,9 +27,7 @@ class CheckForm{
 
     check(form , value){
         this.form = form;  
-        this.value = value;  
-          
-       
+        this.value = value;   
         if (!this.form.checkValidity()) { 
             this.value=false;
             return value;
